@@ -657,6 +657,10 @@ h3 {
   list-style: none;
 }
 
+.admin-more-drinks-container {
+  position: relative;
+}
+
 .admin-more-drinks {
   width: 100%;
   margin-top: 0.8rem;
@@ -674,13 +678,16 @@ h3 {
 }
 
 .admin-additional-drinks {
+  position: absolute;
+  z-index: 5;
+  inset: calc(100% + 0.5rem) 0 auto;
   max-height: 22rem;
-  margin-top: 0.75rem;
   overflow-y: auto;
   overscroll-behavior: contain;
   border: 1px solid var(--line);
   padding: 0 0.75rem;
   background: #11100e;
+  box-shadow: 0 1rem 2rem var(--shadow);
 }
 
 .admin-drink-row {

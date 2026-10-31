@@ -498,7 +498,7 @@ export default function AdminPage() {
                 <>
                   <ul>{renderDrinkRows(visibleDrinks)}</ul>
                   {additionalDrinks.length > 0 && (
-                    <>
+                    <div className="admin-more-drinks-container">
                       <button
                         aria-controls="admin-additional-drinks"
                         aria-expanded={showAdditionalDrinks}
@@ -515,11 +515,12 @@ export default function AdminPage() {
                           aria-label="Bebidas adicionales"
                           className="admin-additional-drinks"
                           id="admin-additional-drinks"
+                          role="region"
                         >
                           <ul>{renderDrinkRows(additionalDrinks)}</ul>
                         </div>
                       )}
-                    </>
+                    </div>
                   )}
                 </>
               ) : (
