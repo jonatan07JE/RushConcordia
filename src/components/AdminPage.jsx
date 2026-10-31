@@ -316,7 +316,7 @@ export default function AdminPage() {
                 <p className="eyebrow">Rush Concordia · Administración</p>
                 <h1>Configuración necesaria</h1>
                 <p>Conecta el proyecto gratuito de Supabase para habilitar el acceso seguro al panel.</p>
-                <a className="btn btn-gold" href="/">Volver al inicio</a>
+                <a className="btn btn-gold" href={import.meta.env.BASE_URL}>Volver al inicio</a>
               </>
             ) : authLoading ? (
               <p role="status">Verificando acceso…</p>

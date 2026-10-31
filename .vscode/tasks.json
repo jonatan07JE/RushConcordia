@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "GitHub: subir cambios automáticamente",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\auto-push.ps1"
+      ],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "clear": false
+      }
+    }
+  ]
+}

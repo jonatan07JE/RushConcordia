@@ -8,7 +8,12 @@ import MenuPage from "./components/MenuPage.jsx";
 import AdminPage from "./components/AdminPage.jsx";
 
 export default function App() {
-  const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+  const basePath = import.meta.env.BASE_URL;
+  const pathname = (
+    window.location.pathname.startsWith(basePath)
+      ? `/${window.location.pathname.slice(basePath.length)}`
+      : window.location.pathname
+  ).replace(/\/+$/, "") || "/";
 
   if (pathname === "/admin") {
     return <AdminPage />;

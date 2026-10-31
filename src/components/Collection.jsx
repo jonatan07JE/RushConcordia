@@ -33,7 +33,7 @@ export default function Collection() {
         ))}
       </div>
       {error && <p className="menu-load-error" role="alert">{error}</p>}
-      <a className="btn btn-outline menu-preview-link" href="/menu">
+      <a className="btn btn-outline menu-preview-link" href={`${import.meta.env.BASE_URL}menu`}>
         Ver menú completo
       </a>
       <p className="menu-note collection-price-note">
