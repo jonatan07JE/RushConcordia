@@ -32,10 +32,6 @@ jobs:
 
       - name: Build site
         run: |
-          if [ -z "$VITE_SUPABASE_URL" ] || [ -z "$VITE_SUPABASE_ANON_KEY" ]; then
-            echo "Configure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in GitHub Actions secrets." >&2
-            exit 1
-          fi
           npm run build
           cp dist/index.html dist/404.html
         env:

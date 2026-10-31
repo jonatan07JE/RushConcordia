@@ -36,7 +36,7 @@ El panel privado requiere inicio de sesión y un UUID autorizado en `admin_users
 El repositorio incluye un workflow que construye y publica el sitio en GitHub Pages cada vez que llegan cambios a `main`.
 
 1. En GitHub, abre **Settings → Pages** y elige **GitHub Actions** como fuente de publicación.
-2. En **Settings → Secrets and variables → Actions**, crea los secretos `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` con los valores públicos de **Project Settings → API**. No agregues nunca la clave `service_role`.
+2. Para habilitar el menú dinámico y el panel de administración, en **Settings → Secrets and variables → Actions**, crea los secretos `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` con los valores públicos de **Project Settings → API**. No agregues nunca la clave `service_role`. Sin estos secretos, el sitio se publica con el catálogo incluido en el proyecto, pero no puede leer bebidas guardadas ni administrar el menú.
 3. La URL del sitio será `https://jonatan07JE.github.io/RushConcordia/`. `/menu` y `/admin` se sirven bajo esa ruta base.
 
 En VS Code, la tarea **GitHub: subir cambios automáticamente** vigila los archivos del proyecto, espera a que terminen las ediciones, crea un commit y hace push a `main`; cada push inicia la publicación. Acepta las tareas automáticas del workspace cuando VS Code lo solicite. Los archivos ignorados como `.env.local`, `node_modules` y `dist` no se suben. Si un push falla, revisa la terminal de la tarea; nunca fuerza cambios remotos.
