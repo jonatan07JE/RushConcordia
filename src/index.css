@@ -513,7 +513,8 @@ h3 {
 .admin-form input:focus-visible,
 .admin-form textarea:focus-visible,
 .admin-form button:focus-visible,
-.admin-drink-row button:focus-visible {
+.admin-drink-row button:focus-visible,
+.admin-more-drinks:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
@@ -654,6 +655,32 @@ h3 {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.admin-more-drinks {
+  width: 100%;
+  margin-top: 0.8rem;
+  border: 1px solid var(--line);
+  padding: 0.7rem 0.85rem;
+  background: #11100e;
+  color: var(--gold);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.admin-more-drinks:hover {
+  background: #191711;
+}
+
+.admin-additional-drinks {
+  max-height: 22rem;
+  margin-top: 0.75rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--line);
+  padding: 0 0.75rem;
+  background: #11100e;
 }
 
 .admin-drink-row {

@@ -52,6 +52,7 @@ export default function AdminPage() {
   const [photo, setPhoto] = useState("");
   const [editingDrink, setEditingDrink] = useState(null);
   const [customDrinks, setCustomDrinks] = useState([]);
+  const [showAdditionalDrinks, setShowAdditionalDrinks] = useState(false);
   const [catalogImported, setCatalogImported] = useState(false);
   const [isImportingCatalog, setIsImportingCatalog] = useState(false);
   const [message, setMessage] = useState("");
@@ -267,6 +268,7 @@ export default function AdminPage() {
     try {
       await deleteCustomDrink(id);
       setCustomDrinks((currentDrinks) => currentDrinks.filter((drink) => drink.id !== id));
+      if (customDrinks.length <= 11) setShowAdditionalDrinks(false);
       if (editingDrink?.id === id) handleCancelEdit();
     } catch (deleteError) {
       setError(deleteError.message || "No se pudo eliminar la bebida.");
@@ -304,6 +306,29 @@ export default function AdminPage() {
       setIsImportingCatalog(false);
     }
   }
+
+  function renderDrinkRows(drinksToRender) {
+    return drinksToRender.map((drink) => (
+      <li className="admin-drink-row" key={drink.id}>
+        <img src={drink.image} alt="" />
+        <div>
+          <h3>{drink.name}</h3>
+          <p>{formatPrice(drink.price)}</p>
+        </div>
+        <div className="admin-drink-actions">
+          <button className="admin-edit-drink" type="button" onClick={() => handleEdit(drink)}>
+            Editar
+          </button>
+          <button className="admin-delete-drink" type="button" onClick={() => handleDelete(drink.id)}>
+            Eliminar
+          </button>
+        </div>
+      </li>
+    ));
+  }
+
+  const visibleDrinks = customDrinks.slice(0, 10);
+  const additionalDrinks = customDrinks.slice(10);
 
   if (!supabase || authLoading || !isAdmin) {
     return (
@@ -470,25 +495,33 @@ export default function AdminPage() {
                 </p>
               )}
               {customDrinks.length ? (
-                <ul>
-                  {customDrinks.map((drink) => (
-                    <li className="admin-drink-row" key={drink.id}>
-                      <img src={drink.image} alt="" />
-                      <div>
-                        <h3>{drink.name}</h3>
-                        <p>{formatPrice(drink.price)}</p>
-                      </div>
-                      <div className="admin-drink-actions">
-                        <button className="admin-edit-drink" type="button" onClick={() => handleEdit(drink)}>
-                          Editar
-                        </button>
-                        <button className="admin-delete-drink" type="button" onClick={() => handleDelete(drink.id)}>
-                          Eliminar
-                        </button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <>
+                  <ul>{renderDrinkRows(visibleDrinks)}</ul>
+                  {additionalDrinks.length > 0 && (
+                    <>
+                      <button
+                        aria-controls="admin-additional-drinks"
+                        aria-expanded={showAdditionalDrinks}
+                        className="admin-more-drinks"
+                        onClick={() => setShowAdditionalDrinks((isOpen) => !isOpen)}
+                        type="button"
+                      >
+                        {showAdditionalDrinks
+                          ? "Ver menos"
+                          : `Ver ${additionalDrinks.length} bebidas más`}
+                      </button>
+                      {showAdditionalDrinks && (
+                        <div
+                          aria-label="Bebidas adicionales"
+                          className="admin-additional-drinks"
+                          id="admin-additional-drinks"
+                        >
+                          <ul>{renderDrinkRows(additionalDrinks)}</ul>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </>
               ) : (
                 <p className="admin-empty-list">Aún no hay bebidas guardadas en la base de datos.</p>
               )}
